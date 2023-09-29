@@ -44,6 +44,30 @@
         </tr>
     </tfoot>
 </table>
+<br>
+<!-- Input for Quantity of Builds -->
+<center><label for="buildQuantity">Quantity of Builds :&nbsp; </label>
+<input type="number" id="buildQuantity" min="1" value="1"></center>
+
+<!-- Summary Table -->
+<table id="summaryTable">
+    <thead>
+        <tr>
+            <th>Component Type</th>
+            <th>Total Quantity</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Summary rows will be added here dynamically -->
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">Grand Total</td>
+            <td id="grandTotalPrice">RM 0.00</td>
+        </tr>
+    </tfoot>
+</table>
 
 <script>
 function loadData(buildFileName) {
@@ -64,6 +88,8 @@ function loadData(buildFileName) {
         .then(response => response.json())
         .then(componentsData => {
             displayBuild(buildData, componentsData);
+            updateSummaryTable();
+            recalculateGrandTotal();
         });
     });
 }
@@ -102,8 +128,10 @@ function displayBuild(buildData, componentsData) {
                 const selectedIndex = modelSelect.value;
                 priceCell.textContent = 'RM ' + component.options[selectedIndex].price.toFixed(2);
                 imgElem.src = component.options[selectedIndex].imageURL;
-                brandCell.textContent = component.options[selectedIndex].brand; // Update the brand cell
+                brandCell.textContent = component.options[selectedIndex].brand;
                 recalculateTotal();
+                updateSummaryTable();
+                recalculateGrandTotal();
             });
         } else {
             modelCell.textContent = component.model;
@@ -120,6 +148,8 @@ function displayBuild(buildData, componentsData) {
         // Add event listener to recalculate total when quantity changes
         quantityInput.addEventListener('input', function() {
             recalculateTotal();
+            updateSummaryTable();
+            recalculateGrandTotal();
         });
 
         // Price cell
@@ -137,15 +167,10 @@ function recalculateTotal() {
 
     // Loop through each row in the table body
     for (let row of tableBody.rows) {
-        // Find the price cell and quantity input in the current row
         let priceCell = row.querySelector('.price');
         let quantityInput = row.querySelector('input[type="number"]');
-
-        // Parse the price value and retrieve the quantity value
         let priceValue = parseFloat(priceCell.textContent.replace('RM ', ''));
         let quantityValue = parseInt(quantityInput.value);
-
-        // Multiply the price by the quantity and add to the total
         total += priceValue * quantityValue;
     }
 
@@ -153,10 +178,54 @@ function recalculateTotal() {
     document.getElementById('totalPrice').textContent = 'RM ' + total.toFixed(2);
 }
 
+function updateSummaryTable() {
+    let tableBody = document.querySelector('tbody');
+    let summaryTableBody = document.querySelector('#summaryTable tbody');
+    summaryTableBody.innerHTML = ''; // Clear previous summary rows
+    
+    let buildQuantity = parseInt(document.getElementById('buildQuantity').value);
+
+    // Loop through each row in the main table body
+    for (let row of tableBody.rows) {
+        let componentType = row.cells[0].textContent;
+        let quantityInput = row.querySelector('input[type="number"]');
+        let priceCell = row.querySelector('.price');
+        
+        let quantityValue = parseInt(quantityInput.value) * buildQuantity;
+        let priceValue = parseFloat(priceCell.textContent.replace('RM ', '')) * buildQuantity;
+
+        // Create a new summary row and append it to the summary table body
+        let summaryRow = summaryTableBody.insertRow();
+        summaryRow.insertCell(0).textContent = componentType;
+        summaryRow.insertCell(1).textContent = quantityValue;
+        summaryRow.insertCell(2).textContent = 'RM ' + priceValue.toFixed(2);
+    }
+}
+
+function recalculateGrandTotal() {
+    let summaryTableBody = document.querySelector('#summaryTable tbody');
+    let grandTotal = 0;
+
+    // Loop through each row in the summary table body and calculate the grand total
+    for (let row of summaryTableBody.rows) {
+        let priceValue = parseFloat(row.cells[2].textContent.replace('RM ', ''));
+        grandTotal += priceValue;
+    }
+
+    // Set the computed grand total to the footer cell of the summary table
+    document.getElementById('grandTotalPrice').textContent = 'RM ' + grandTotal.toFixed(2);
+}
+
+document.getElementById('buildQuantity').addEventListener('input', function() {
+    updateSummaryTable();
+    recalculateGrandTotal();
+});
+
 window.onload = function() {
     loadData('build1.json');
 };
 </script>
+
 
 
 </body>
