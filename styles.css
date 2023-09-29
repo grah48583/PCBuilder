@@ -94,4 +94,6 @@ table img:hover {
     /* Ensure the enlarged image is displayed above other elements */
     position: relative;
 }
-
+input[type="number"] {
+    text-align: center;
+}
