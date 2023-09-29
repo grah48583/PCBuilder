@@ -226,15 +226,6 @@ document.getElementById('buildQuantity').addEventListener('input', function() {
     recalculateGrandTotal();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Target all rows in the table body
-    document.querySelectorAll('table tbody tr').forEach(row => {
-        // Assuming the model cell is the 4th cell in each row
-        let modelCell = row.cells[3];
-        // Set the text alignment of the model cell to left
-        modelCell.style.textAlign = 'left';
-    });
-});
 
 window.onload = function() {
     loadData('build1.json');
