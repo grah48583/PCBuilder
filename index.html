@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Custom PC Build</title>
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -31,7 +32,7 @@
             <th>Image</th>
             <th>Model</th>
             <th>Quantity</th>
-            <th>Price (MYR)</th>
+            <th>Price</th>
         </tr>
     </thead>
     <tbody id="componentsList">
@@ -46,8 +47,12 @@
 </table>
 <br>
 <!-- Input for Quantity of Builds -->
-<center><label for="buildQuantity">Quantity of Builds :&nbsp; </label>
-<input type="number" id="buildQuantity" min="1" value="1"></center>
+<center><!-- Wrap the label and input in a div with a class "build-quantity-container" -->
+<div class="build-quantity-container">
+    <label for="buildQuantity">Quantity of Builds:</label>
+    <input type="number" id="buildQuantity" min="1" value="1">
+</div>
+</center>
 
 <!-- Summary Table -->
 <table id="summaryTable">
