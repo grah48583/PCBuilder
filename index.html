@@ -1,247 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Custom PC Build</title>
-<link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-
-<div id="buildSelector">
-    <button onclick="loadData('build1.json')">Build 1</button>
-    <button onclick="loadData('build2.json')">Build 2</button>
-    <button onclick="loadData('build3.json')">Build 3</button>
-    <button onclick="loadData('build4.json')">Build 4</button>
-</div>
-
-<h2 id="buildTitle"></h2>
-<p id="buildDescription"></p>
-
-<table>
-    <thead>
+  <body>
+    <div id="buildSelector">
+      <button onclick="loadData('build1.json')">Build 1</button>
+      <button onclick="loadData('build2.json')">Build 2</button>
+      <button onclick="loadData('build3.json')">Build 3</button>
+      <button onclick="loadData('build4.json')">Build 4</button>
+    </div>
+    <h2 id="buildTitle"></h2>
+    <p id="buildDescription"></p>
+    <table>
+      <thead>
         <tr>
-            <th>Component Type</th>
-            <th>Brand</th>
-            <th>Image</th>
-            <th>Model</th>
-            <th class="headercenter">Quantity</th>
-            <th class="headercenter">Price</th>
+          <th>Component Type</th>
+          <th>Brand</th>
+          <th>Image</th>
+          <th>Model</th>
+          <th class="headercenter">Quantity</th>
+          <th class="headercenter">Price</th>
         </tr>
-    </thead>
-    <tbody id="componentsList">
+      </thead>
+      <tbody id="componentsList">
         <!-- Rows will be inserted here by JavaScript -->
-    </tbody>
-    <tfoot>
+      </tbody>
+      <tfoot>
         <tr>
-            <td colspan="5">Total Price</td>
-            <td id="totalPrice"></td>
+          <td colspan="5">Total Price</td>
+          <td id="totalPrice"></td>
         </tr>
-    </tfoot>
-</table>
-<br>
-<!-- Input for Quantity of Builds -->
-<center><!-- Wrap the label and input in a div with a class "build-quantity-container" -->
-<div class="build-quantity-container">
-    <label for="buildQuantity">Quantity of Builds:</label>
-    <input type="number" id="buildQuantity" min="1" value="1">
-</div>
-</center>
+      </tfoot>
+    </table>
+    <br />
+    <!-- Input for Quantity of Builds -->
+    <div class="build-quantity-container">
+      <label for="buildQuantity">Quantity of Builds:</label>
+      <input type="number" id="buildQuantity" min="1" value="1" />
+    </div>
 
-<!-- Summary Table -->
-<table id="summaryTable">
-    <thead>
+    <!-- Summary Table -->
+    <table id="summaryTable">
+      <thead>
         <tr>
-            <th>Component Type</th>
-            <th class="headercenter">Total Quantity</th>
-            <th class="headercenter">Total Price</th>
+          <th>Component Type</th>
+          <th class="headercenter">Total Quantity</th>
+          <th class="headercenter">Total Price</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <!-- Summary rows will be added here dynamically -->
-    </tbody>
-    <tfoot>
+      </tbody>
+      <tfoot>
         <tr>
-            <td colspan="2">Grand Total</td>
-            <td id="grandTotalPrice">RM 0.00</td>
+          <td colspan="2">Grand Total</td>
+          <td id="grandTotalPrice">RM 0.00</td>
         </tr>
-    </tfoot>
-</table>
+      </tfoot>
+    </table>
 
-<script>
-function loadData(buildFileName) {
-    // Clear previous build details
-    let tableBody = document.getElementById('componentsList');
-    tableBody.innerHTML = '';
+    <script>
+      function loadData(buildFileName) {
+        // Clear previous build details
+        let tableBody = document.getElementById("componentsList");
+        tableBody.innerHTML = "";
 
-    // Fetch the specific build JSON first
-    fetch(buildFileName)
-    .then(response => response.json())
-    .then(buildData => {
-        // Display title and description from build-specific JSON
-        document.getElementById('buildTitle').textContent = buildData.title;
-        document.getElementById('buildDescription').textContent = buildData.description;
+        // Fetch the specific build JSON first
+        fetch(buildFileName)
+          .then((response) => response.json())
+          .then((buildData) => {
+            // Display title and description from build-specific JSON
+            document.getElementById("buildTitle").textContent = buildData.title;
+            document.getElementById("buildDescription").textContent =
+              buildData.description;
 
-        // Fetch the main components JSON
-        return fetch('components.json')
-        .then(response => response.json())
-        .then(componentsData => {
-            displayBuild(buildData, componentsData);
-            updateSummaryTable();
-            recalculateGrandTotal();
-        });
-    });
-}
+            // Fetch the main components JSON
+            return fetch("components.json")
+              .then((response) => response.json())
+              .then((componentsData) => {
+                displayBuild(buildData, componentsData);
+                updateSummaryTable();
+                recalculateGrandTotal();
+              });
+          });
+      }
 
-function displayBuild(buildData, componentsData) {
-    let tableBody = document.querySelector('tbody');
+      function displayBuild(buildData, componentsData) {
+        let tableBody = document.querySelector("tbody");
 
-    componentsData.buildDetails.forEach(component => {
-        let defaultIndex = buildData.defaults[component.componentType];
-        let defaultOption = component.options ? component.options[defaultIndex] : null;
-        let row = tableBody.insertRow();
-        
-        // Component type cell
-        row.insertCell(0).textContent = component.componentType;
+        componentsData.buildDetails.forEach((component) => {
+          let defaultIndex = buildData.defaults[component.componentType];
+          let defaultOption = component.options
+            ? component.options[defaultIndex]
+            : null;
+          let row = tableBody.insertRow();
 
-        // Brand cell (displays brand as plain text)
-        let brandCell = row.insertCell(1);
-        brandCell.textContent = defaultOption ? defaultOption.brand : component.brand;
+          // Component type cell
+          row.insertCell(0).textContent = component.componentType;
 
-        // Image cell
-        let imgElem = document.createElement('img');
-        imgElem.src = defaultOption ? defaultOption.imageURL : component.imageURL;
-        row.insertCell(2).appendChild(imgElem);
+          // Brand cell (displays brand as plain text)
+          let brandCell = row.insertCell(1);
+          brandCell.textContent = defaultOption
+            ? defaultOption.brand
+            : component.brand;
 
-        // Model cell (uses dropdown if multiple options)
-        let modelCell = row.insertCell(3);
-        if (component.options) {
-            let modelSelect = document.createElement('select');
+          // Image cell
+          let imgElem = document.createElement("img");
+          imgElem.src = defaultOption
+            ? defaultOption.imageURL
+            : component.imageURL;
+          row.insertCell(2).appendChild(imgElem);
+
+          // Model cell (uses dropdown if multiple options)
+          let modelCell = row.insertCell(3);
+          if (component.options) {
+            let modelSelect = document.createElement("select");
             component.options.forEach((option, index) => {
-                let optionElem = new Option(option.model, index);
-                modelSelect.add(optionElem);
+              let optionElem = new Option(option.model, index);
+              modelSelect.add(optionElem);
             });
             modelSelect.value = defaultIndex;
             modelCell.appendChild(modelSelect);
-            modelSelect.addEventListener('change', function() {
-                const selectedIndex = modelSelect.value;
-                priceCell.textContent = 'RM ' + component.options[selectedIndex].price.toFixed(2);
-                imgElem.src = component.options[selectedIndex].imageURL;
-                brandCell.textContent = component.options[selectedIndex].brand;
-                recalculateTotal();
-                updateSummaryTable();
-                recalculateGrandTotal();
+            modelSelect.addEventListener("change", function () {
+              const selectedIndex = modelSelect.value;
+              priceCell.textContent =
+                "RM " + component.options[selectedIndex].price.toFixed(2);
+              imgElem.src = component.options[selectedIndex].imageURL;
+              brandCell.textContent = component.options[selectedIndex].brand;
+              recalculateTotal();
+              updateSummaryTable();
+              recalculateGrandTotal();
             });
-        } else {
+          } else {
             modelCell.textContent = component.model;
-        }
+          }
 
-        // Quantity cell with input range from 1 to 10
-        let quantityInput = document.createElement('input');
-        quantityInput.type = 'number';
-        quantityInput.min = 0;
-        quantityInput.max = 10;
-        quantityInput.value = defaultOption ? defaultOption.quantity : component.quantity;
-        row.insertCell(4).appendChild(quantityInput);
+          // Quantity cell with input range from 1 to 10
+          let quantityInput = document.createElement("input");
+          quantityInput.type = "number";
+          quantityInput.min = 0;
+          quantityInput.max = 10;
+          quantityInput.value = defaultOption
+            ? defaultOption.quantity
+            : component.quantity;
+          row.insertCell(4).appendChild(quantityInput);
 
-        // Add event listener to recalculate total when quantity changes
-        quantityInput.addEventListener('input', function() {
+          // Add event listener to recalculate total when quantity changes
+          quantityInput.addEventListener("input", function () {
             recalculateTotal();
             updateSummaryTable();
             recalculateGrandTotal();
+          });
+
+          // Price cell
+          let priceCell = row.insertCell(5);
+          priceCell.textContent =
+            "RM " +
+            (defaultOption ? defaultOption.price : component.price).toFixed(2);
+          priceCell.className = "price";
         });
 
-        // Price cell
-        let priceCell = row.insertCell(5);
-        priceCell.textContent = 'RM ' + (defaultOption ? defaultOption.price : component.price).toFixed(2);
-        priceCell.className = "price";
-    });
+        recalculateTotal();
+      }
 
-    recalculateTotal();
-}
+      function recalculateTotal() {
+        let tableBody = document.querySelector("tbody");
+        let total = 0;
 
-function recalculateTotal() {
-    let tableBody = document.querySelector('tbody');
-    let total = 0;
+        // Loop through each row in the table body
+        for (let row of tableBody.rows) {
+          let priceCell = row.querySelector(".price");
+          let quantityInput = row.querySelector('input[type="number"]');
+          let priceValue = parseFloat(priceCell.textContent.replace("RM ", ""));
+          let quantityValue = parseInt(quantityInput.value);
+          total += priceValue * quantityValue;
+        }
 
-    // Loop through each row in the table body
-    for (let row of tableBody.rows) {
-        let priceCell = row.querySelector('.price');
-        let quantityInput = row.querySelector('input[type="number"]');
-        let priceValue = parseFloat(priceCell.textContent.replace('RM ', ''));
-        let quantityValue = parseInt(quantityInput.value);
-        total += priceValue * quantityValue;
-    }
+        // Set the computed total to the footer cell
+        document.getElementById("totalPrice").textContent =
+          "RM " + total.toFixed(2);
+      }
 
-    // Set the computed total to the footer cell
-    document.getElementById('totalPrice').textContent = 'RM ' + total.toFixed(2);
-}
+      function updateSummaryTable() {
+        let tableBody = document.querySelector("tbody");
+        let summaryTableBody = document.querySelector("#summaryTable tbody");
+        summaryTableBody.innerHTML = ""; // Clear previous summary rows
 
+        let buildQuantity = parseInt(
+          document.getElementById("buildQuantity").value
+        );
 
-function updateSummaryTable() {
-    let tableBody = document.querySelector('tbody');
-    let summaryTableBody = document.querySelector('#summaryTable tbody');
-    summaryTableBody.innerHTML = ''; // Clear previous summary rows
-    
-    let buildQuantity = parseInt(document.getElementById('buildQuantity').value);
+        // Loop through each row in the main table body
+        for (let row of tableBody.rows) {
+          let componentType = row.cells[0].textContent;
+          let quantityInput = row.querySelector('input[type="number"]');
+          let priceCell = row.querySelector(".price");
 
-    // Loop through each row in the main table body
-    for (let row of tableBody.rows) {
-        let componentType = row.cells[0].textContent;
-        let quantityInput = row.querySelector('input[type="number"]');
-        let priceCell = row.querySelector('.price');
-        
-        let quantityValue = parseInt(quantityInput.value) * buildQuantity;
-        let priceValue = parseFloat(priceCell.textContent.replace('RM ', '')) * buildQuantity;
+          let quantityValue = parseInt(quantityInput.value) * buildQuantity;
+          let priceValue =
+            parseFloat(priceCell.textContent.replace("RM ", "")) *
+            buildQuantity;
 
-        // Create a new summary row and append it to the summary table body
-        let summaryRow = summaryTableBody.insertRow();
-        summaryRow.insertCell(0).textContent = componentType;
-        summaryRow.insertCell(1).textContent = quantityValue;
-        summaryRow.insertCell(2).textContent = 'RM ' + priceValue.toFixed(2);
-    }
-}
+          // Create a new summary row and append it to the summary table body
+          let summaryRow = summaryTableBody.insertRow();
+          summaryRow.insertCell(0).textContent = componentType;
+          summaryRow.insertCell(1).textContent = quantityValue;
+          summaryRow.insertCell(2).textContent = "RM " + priceValue.toFixed(2);
+        }
+      }
 
-function recalculateGrandTotal() {
-    let summaryTableBody = document.querySelector('#summaryTable tbody');
-    let buildQuantityInput = document.getElementById('buildQuantity'); // Get the build quantity input element
-    let buildQuantity = parseInt(buildQuantityInput.value) || 1; // Get the build quantity value
-    let grandTotal = 0;
+      function recalculateGrandTotal() {
+        let summaryTableBody = document.querySelector("#summaryTable tbody");
+        let buildQuantityInput = document.getElementById("buildQuantity"); // Get the build quantity input element
+        let buildQuantity = parseInt(buildQuantityInput.value) || 1; // Get the build quantity value
+        let grandTotal = 0;
 
-    // Loop through each row in the summary table body and calculate the grand total
-    for (let row of summaryTableBody.rows) {
-        let priceValue = parseFloat(row.cells[2].textContent.replace('RM ', ''));
-        grandTotal += priceValue;
-    }
+        // Loop through each row in the summary table body and calculate the grand total
+        for (let row of summaryTableBody.rows) {
+          let priceValue = parseFloat(
+            row.cells[2].textContent.replace("RM ", "")
+          );
+          grandTotal += priceValue;
+        }
 
-    grandTotal *= buildQuantity; // Multiply the grand total by the build quantity
+        grandTotal *= buildQuantity; // Multiply the grand total by the build quantity
 
-    // Set the computed grand total to the footer cell of the summary table
-    document.getElementById('grandTotalPrice').textContent = 'RM ' + grandTotal.toFixed(2);
-}
+        // Set the computed grand total to the footer cell of the summary table
+        document.getElementById("grandTotalPrice").textContent =
+          "RM " + grandTotal.toFixed(2);
+      }
 
+      document
+        .getElementById("buildQuantity")
+        .addEventListener("input", function () {
+          updateSummaryTable();
+          recalculateGrandTotal();
+        });
 
-
-document.getElementById('buildQuantity').addEventListener('input', function() {
-    updateSummaryTable();
-    recalculateGrandTotal();
-});
-
-
-
-window.onload = function() {
-    loadData('build1.json');
-};
-</script>
-
-
-
-</body>
-
-
+      window.onload = function () {
+        loadData("build1.json");
+      };
+    </script>
+  </body>
 </html>
