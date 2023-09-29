@@ -1,341 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Custom PC Build</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body>
-    <div id="buildSelector">
-      <button onclick="loadData('build1.json')">Build 1</button>
-      <button onclick="loadData('build2.json')">Build 2</button>
-      <button onclick="loadData('build3.json')">Build 3</button>
-      <button onclick="loadData('build4.json')">Build 4</button>
-    </div>
-    <h2 id="buildTitle"></h2>
-    <p id="buildDescription"></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Component Type</th>
-          <th>Brand</th>
-          <th>Image</th>
-          <th>Model</th>
-          <th class="headercenter">Quantity</th>
-          <th class="headercenter">Price</th>
-        </tr>
-      </thead>
-      <tbody id="componentsList">
-        <!-- Rows will be inserted here by JavaScript -->
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="5">Total Price</td>
-          <td id="totalPrice"></td>
-        </tr>
-      </tfoot>
-    </table>
-    <br />
-    <!-- Input for Quantity of Builds -->
-    <div class="build-quantity-container">
-      <label for="buildQuantity">Quantity of Builds:</label>
-      <input type="number" id="buildQuantity" min="1" value="1" />
-    </div>
+  <title>Custom PC Build</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
 
-    <!-- Summary Table -->
-    <table id="summaryTable">
-      <thead>
-        <tr>
-          <th>Component Type</th>
-          <th class="headercenter">Total Quantity</th>
-          <th class="headercenter">Total Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Summary rows will be added here dynamically -->
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="2">Grand Total</td>
-          <td id="grandTotalPrice">RM 0.00</td>
-        </tr>
-      </tfoot>
-    </table>
-    <br />
-    <button id="generatePDF">Generate PDF</button>
+<body>
+  <div id="buildSelector">
+    <button onclick="loadData('build1.json')">Build 1</button>
+    <button onclick="loadData('build2.json')">Build 2</button>
+    <button onclick="loadData('build3.json')">Build 3</button>
+    <button onclick="loadData('build4.json')">Build 4</button>
+  </div>
+  <h2 id="buildTitle"></h2>
+  <p id="buildDescription"></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Component Type</th>
+        <th>Brand</th>
+        <th>Image</th>
+        <th>Model</th>
+        <th class="headercenter">Quantity</th>
+        <th class="headercenter">Price</th>
+      </tr>
+    </thead>
+    <tbody id="componentsList">
+      <!-- Rows will be inserted here by JavaScript -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5">Total Price</td>
+        <td id="totalPrice"></td>
+      </tr>
+    </tfoot>
+  </table>
+  <br />
+  <!-- Input for Quantity of Builds -->
+  <div class="build-quantity-container">
+    <label for="buildQuantity">Quantity of Builds:</label>
+    <input type="number" id="buildQuantity" min="1" value="1" />
+  </div>
 
-    <button id="generatePDF">Generate PDF</button>
+  <!-- Summary Table -->
+  <table id="summaryTable">
+    <thead>
+      <tr>
+        <th>Component Type</th>
+        <th class="headercenter">Total Quantity</th>
+        <th class="headercenter">Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Summary rows will be added here dynamically -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">Grand Total</td>
+        <td id="grandTotalPrice">RM 0.00</td>
+      </tr>
+    </tfoot>
+  </table>
+  <br />
 
-    <script>
-      function loadData(buildFileName) {
-        // Clear previous build details
-        let tableBody = document.getElementById("componentsList");
-        tableBody.innerHTML = "";
+  <script>
+    function loadData(buildFileName) {
+      // Clear previous build details
+      let tableBody = document.getElementById("componentsList");
+      tableBody.innerHTML = "";
 
-        // Fetch the specific build JSON first
-        fetch(buildFileName)
-          .then((response) => response.json())
-          .then((buildData) => {
-            // Display title and description from build-specific JSON
-            document.getElementById("buildTitle").textContent = buildData.title;
-            document.getElementById("buildDescription").textContent =
-              buildData.description;
+      // Fetch the specific build JSON first
+      fetch(buildFileName)
+        .then((response) => response.json())
+        .then((buildData) => {
+          // Display title and description from build-specific JSON
+          document.getElementById("buildTitle").textContent = buildData.title;
+          document.getElementById("buildDescription").textContent =
+            buildData.description;
 
-            // Fetch the main components JSON
-            return fetch("components.json")
-              .then((response) => response.json())
-              .then((componentsData) => {
-                displayBuild(buildData, componentsData);
-                updateSummaryTable();
-                recalculateGrandTotal();
-              });
-          });
-      }
-
-      function displayBuild(buildData, componentsData) {
-        let tableBody = document.querySelector("tbody");
-
-        componentsData.buildDetails.forEach((component) => {
-          let defaultIndex = buildData.defaults[component.componentType];
-          let defaultOption = component.options
-            ? component.options[defaultIndex]
-            : null;
-          let row = tableBody.insertRow();
-
-          // Component type cell
-          row.insertCell(0).textContent = component.componentType;
-
-          // Brand cell (displays brand as plain text)
-          let brandCell = row.insertCell(1);
-          brandCell.textContent = defaultOption
-            ? defaultOption.brand
-            : component.brand;
-
-          // Image cell
-          let imgElem = document.createElement("img");
-          imgElem.src = defaultOption
-            ? defaultOption.imageURL
-            : component.imageURL;
-          row.insertCell(2).appendChild(imgElem);
-
-          // Model cell (uses dropdown if multiple options)
-          let modelCell = row.insertCell(3);
-          if (component.options) {
-            let modelSelect = document.createElement("select");
-            component.options.forEach((option, index) => {
-              let optionElem = new Option(option.model, index);
-              modelSelect.add(optionElem);
-            });
-            modelSelect.value = defaultIndex;
-            modelCell.appendChild(modelSelect);
-            modelSelect.addEventListener("change", function () {
-              const selectedIndex = modelSelect.value;
-              priceCell.textContent =
-                "RM " + component.options[selectedIndex].price.toFixed(2);
-              imgElem.src = component.options[selectedIndex].imageURL;
-              brandCell.textContent = component.options[selectedIndex].brand;
-              recalculateTotal();
+          // Fetch the main components JSON
+          return fetch("components.json")
+            .then((response) => response.json())
+            .then((componentsData) => {
+              displayBuild(buildData, componentsData);
               updateSummaryTable();
               recalculateGrandTotal();
             });
-          } else {
-            modelCell.textContent = component.model;
-          }
+        });
+    }
 
-          // Quantity cell with input range from 1 to 10
-          let quantityInput = document.createElement("input");
-          quantityInput.type = "number";
-          quantityInput.min = 0;
-          quantityInput.max = 10;
-          quantityInput.value = defaultOption
-            ? defaultOption.quantity
-            : component.quantity;
-          row.insertCell(4).appendChild(quantityInput);
+    function displayBuild(buildData, componentsData) {
+      let tableBody = document.querySelector("tbody");
 
-          // Add event listener to recalculate total when quantity changes
-          quantityInput.addEventListener("input", function () {
+      componentsData.buildDetails.forEach((component) => {
+        let defaultIndex = buildData.defaults[component.componentType];
+        let defaultOption = component.options
+          ? component.options[defaultIndex]
+          : null;
+        let row = tableBody.insertRow();
+
+        // Component type cell
+        row.insertCell(0).textContent = component.componentType;
+
+        // Brand cell (displays brand as plain text)
+        let brandCell = row.insertCell(1);
+        brandCell.textContent = defaultOption
+          ? defaultOption.brand
+          : component.brand;
+
+        // Image cell
+        let imgElem = document.createElement("img");
+        imgElem.src = defaultOption
+          ? defaultOption.imageURL
+          : component.imageURL;
+        row.insertCell(2).appendChild(imgElem);
+
+        // Model cell (uses dropdown if multiple options)
+        let modelCell = row.insertCell(3);
+        if (component.options) {
+          let modelSelect = document.createElement("select");
+          component.options.forEach((option, index) => {
+            let optionElem = new Option(option.model, index);
+            modelSelect.add(optionElem);
+          });
+          modelSelect.value = defaultIndex;
+          modelCell.appendChild(modelSelect);
+          modelSelect.addEventListener("change", function () {
+            const selectedIndex = modelSelect.value;
+            priceCell.textContent =
+              "RM " + component.options[selectedIndex].price.toFixed(2);
+            imgElem.src = component.options[selectedIndex].imageURL;
+            brandCell.textContent = component.options[selectedIndex].brand;
             recalculateTotal();
             updateSummaryTable();
             recalculateGrandTotal();
           });
-
-          // Price cell
-          let priceCell = row.insertCell(5);
-          priceCell.textContent =
-            "RM " +
-            (defaultOption ? defaultOption.price : component.price).toFixed(2);
-          priceCell.className = "price";
-        });
-
-        recalculateTotal();
-      }
-
-      function recalculateTotal() {
-        let tableBody = document.querySelector("tbody");
-        let total = 0;
-
-        // Loop through each row in the table body
-        for (let row of tableBody.rows) {
-          let priceCell = row.querySelector(".price");
-          let quantityInput = row.querySelector('input[type="number"]');
-          let priceValue = parseFloat(priceCell.textContent.replace("RM ", ""));
-          let quantityValue = parseInt(quantityInput.value);
-          total += priceValue * quantityValue; // Calculate total price for each component
+        } else {
+          modelCell.textContent = component.model;
         }
 
-        // Set the computed total to the footer cell
-        document.getElementById("totalPrice").textContent =
-          "RM " + total.toFixed(2);
-      }
+        // Quantity cell with input range from 1 to 10
+        let quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.min = 0;
+        quantityInput.max = 10;
+        quantityInput.value = defaultOption
+          ? defaultOption.quantity
+          : component.quantity;
+        row.insertCell(4).appendChild(quantityInput);
 
-      function updateSummaryTable() {
-        let tableBody = document.querySelector("tbody");
-        let summaryTableBody = document.querySelector("#summaryTable tbody");
-        summaryTableBody.innerHTML = ""; // Clear previous summary rows
-
-        let buildQuantity = parseInt(
-          document.getElementById("buildQuantity").value
-        );
-
-        // Loop through each row in the main table body
-        for (let row of tableBody.rows) {
-          let componentType = row.cells[0].textContent;
-          let quantityInput = row.querySelector('input[type="number"]');
-          let priceCell = row.querySelector(".price");
-
-          let quantityValue = parseInt(quantityInput.value) * buildQuantity;
-          let priceValue =
-            parseFloat(priceCell.textContent.replace("RM ", "")) *
-            quantityValue; // Calculate total price for each component
-
-          // Create a new summary row and append it to the summary table body
-          let summaryRow = summaryTableBody.insertRow();
-          summaryRow.insertCell(0).textContent = componentType;
-          summaryRow.insertCell(1).textContent = quantityValue;
-          summaryRow.insertCell(2).textContent = "RM " + priceValue.toFixed(2);
-        }
-      }
-      function recalculateGrandTotal() {
-        let summaryTableBody = document.querySelector("#summaryTable tbody");
-        let grandTotal = 0;
-
-        // Loop through each row in the summary table body and calculate the grand total
-        for (let row of summaryTableBody.rows) {
-          let priceValue = parseFloat(
-            row.cells[2].textContent.replace("RM ", "")
-          );
-          grandTotal += priceValue;
-        }
-
-        // Set the computed grand total to the footer cell of the summary table
-        document.getElementById("grandTotalPrice").textContent =
-          "RM " + grandTotal.toFixed(2);
-      }
-
-      document
-        .getElementById("buildQuantity")
-        .addEventListener("input", function () {
+        // Add event listener to recalculate total when quantity changes
+        quantityInput.addEventListener("input", function () {
+          recalculateTotal();
           updateSummaryTable();
           recalculateGrandTotal();
         });
 
-      window.onload = function () {
-        loadData("build1.json");
-      };
-
-      document
-        .getElementById("generatePDF")
-        .addEventListener("click", async () => {
-          // Gather data from the components table
-          const componentsTableBody = document.querySelector("#componentsList");
-          const componentsData = Array.from(componentsTableBody.rows).map(
-            (row) => ({
-              componentType: row.cells[0].textContent,
-              brand: row.cells[1].textContent,
-              model: row.cells[3].textContent,
-              quantity: row.querySelector('input[type="number"]').value,
-              price: row.cells[5].textContent.replace("RM ", ""),
-            })
-          );
-
-          // Gather data from the summary table
-          const summaryTableBody = document.querySelector(
-            "#summaryTable tbody"
-          );
-          const summaryData = Array.from(summaryTableBody.rows).map((row) => ({
-            componentType: row.cells[0].textContent,
-            totalQuantity: row.cells[1].textContent,
-            totalPrice: row.cells[2].textContent.replace("RM ", ""),
-          }));
-
-          const grandTotal = document
-            .getElementById("grandTotalPrice")
-            .textContent.replace("RM ", "");
-
-          // Create the payload object
-          const payload = {
-            componentsData,
-            summaryData,
-            grandTotal,
-          };
-
-          try {
-            // Make a POST request to the updated AWS Lambda function through API Gateway
-            try {
-              const response = await fetch(
-                "https://xfovazi2qv7mgbggb5tgw3wmce0zgtwk.lambda-url.ap-southeast-1.on.aws/generate-pdf",
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Headers": "Content-Type",
-                    "Access-Control-Allow-Methods": "POST",
-                  },
-                  body: JSON.stringify(payload),
-                }
-              );
-
-              if (response.ok) {
-                console.log("PDF generated successfully.");
-              } else {
-                const errorText = await response.text();
-                console.error("Error generating PDF:", errorText);
-              }
-            } catch (error) {
-              console.error("Network error:", error);
-            }
-
-            // Check if the response is successful
-            if (response.ok) {
-              // Handle the successful response, e.g., download the generated PDF or display a success message
-              console.log("PDF generated successfully.");
-            } else {
-              // Handle the error response
-              const errorText = await response.text();
-              console.error("Error generating PDF:", errorText);
-            }
-          } catch (error) {
-            // Handle the network error
-            console.error("Network error:", error);
-          }
-        });
-      document.getElementById("generatePDF").addEventListener("click", () => {
-        const pdf = new jsPDF();
-        const pdfElement = document.getElementById("pdfContent"); // Replace with the ID of the HTML element you want to convert
-
-        pdf.fromHTML(pdfElement, 15, 15);
-        pdf.save("generated.pdf");
+        // Price cell
+        let priceCell = row.insertCell(5);
+        priceCell.textContent =
+          "RM " +
+          (defaultOption ? defaultOption.price : component.price).toFixed(2);
+        priceCell.className = "price";
       });
-    </script>
-  </body>
+
+      recalculateTotal();
+    }
+
+    function recalculateTotal() {
+      let tableBody = document.querySelector("tbody");
+      let total = 0;
+
+      // Loop through each row in the table body
+      for (let row of tableBody.rows) {
+        let priceCell = row.querySelector(".price");
+        let quantityInput = row.querySelector('input[type="number"]');
+        let priceValue = parseFloat(priceCell.textContent.replace("RM ", ""));
+        let quantityValue = parseInt(quantityInput.value);
+        total += priceValue * quantityValue; // Calculate total price for each component
+      }
+
+      // Set the computed total to the footer cell
+      document.getElementById("totalPrice").textContent =
+        "RM " + total.toFixed(2);
+    }
+
+    function updateSummaryTable() {
+      let tableBody = document.querySelector("tbody");
+      let summaryTableBody = document.querySelector("#summaryTable tbody");
+      summaryTableBody.innerHTML = ""; // Clear previous summary rows
+
+      let buildQuantity = parseInt(
+        document.getElementById("buildQuantity").value
+      );
+
+      // Loop through each row in the main table body
+      for (let row of tableBody.rows) {
+        let componentType = row.cells[0].textContent;
+        let quantityInput = row.querySelector('input[type="number"]');
+        let priceCell = row.querySelector(".price");
+
+        let quantityValue = parseInt(quantityInput.value) * buildQuantity;
+        let priceValue =
+          parseFloat(priceCell.textContent.replace("RM ", "")) *
+          quantityValue; // Calculate total price for each component
+
+        // Create a new summary row and append it to the summary table body
+        let summaryRow = summaryTableBody.insertRow();
+        summaryRow.insertCell(0).textContent = componentType;
+        summaryRow.insertCell(1).textContent = quantityValue;
+        summaryRow.insertCell(2).textContent = "RM " + priceValue.toFixed(2);
+      }
+    }
+    function recalculateGrandTotal() {
+      let summaryTableBody = document.querySelector("#summaryTable tbody");
+      let grandTotal = 0;
+
+      // Loop through each row in the summary table body and calculate the grand total
+      for (let row of summaryTableBody.rows) {
+        let priceValue = parseFloat(
+          row.cells[2].textContent.replace("RM ", "")
+        );
+        grandTotal += priceValue;
+      }
+
+      // Set the computed grand total to the footer cell of the summary table
+      document.getElementById("grandTotalPrice").textContent =
+        "RM " + grandTotal.toFixed(2);
+    }
+
+    document
+      .getElementById("buildQuantity")
+      .addEventListener("input", function () {
+        updateSummaryTable();
+        recalculateGrandTotal();
+      });
+
+    window.onload = function () {
+      loadData("build1.json");
+    };
+
+    document
+      .getElementById("generatePDF")
+      .addEventListener("click", async () => {
+        // Gather data from the components table
+        const componentsTableBody = document.querySelector("#componentsList");
+        const componentsData = Array.from(componentsTableBody.rows).map(
+          (row) => ({
+            componentType: row.cells[0].textContent,
+            brand: row.cells[1].textContent,
+            model: row.cells[3].textContent,
+            quantity: row.querySelector('input[type="number"]').value,
+            price: row.cells[5].textContent.replace("RM ", ""),
+          })
+        );
+
+        // Gather data from the summary table
+        const summaryTableBody = document.querySelector(
+          "#summaryTable tbody"
+        );
+        const summaryData = Array.from(summaryTableBody.rows).map((row) => ({
+          componentType: row.cells[0].textContent,
+          totalQuantity: row.cells[1].textContent,
+          totalPrice: row.cells[2].textContent.replace("RM ", ""),
+        }));
+
+        const grandTotal = document
+          .getElementById("grandTotalPrice")
+          .textContent.replace("RM ", "");
+
+        // Create the payload object
+        const payload = {
+          componentsData,
+          summaryData,
+          grandTotal,
+        };
+
+
+      });
+
+  </script>
+</body>
+
 </html>
