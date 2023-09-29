@@ -193,7 +193,7 @@
             "options": [
                 {
                     "brand": "Thermalright",
-                    "imageURL": "http://thermalright.com/wp-content/uploads/2021/12/SS135-BLACK-1500-5-600x600.jpg",
+                    "imageURL": "https://m.media-amazon.com/images/I/41WP6CUSJGL.jpg",
                     "model": "Silver Soul 135 BLACK",
                     "quantity": 1,
                     "price": 205
@@ -227,7 +227,7 @@
                     },
                 {
                     "brand": "Lian Li",
-                    "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
+                    "imageURL": "https://lian-li.com/wp-content/uploads/2021/06/sp750-02.jpg",
                     "model": "SP750 | SFX 750W 80+ Gold Certified Fully Modular SFX",
                     "quantity": 1,
                     "price": 480
@@ -255,7 +255,7 @@
                     },
                 {
                     "brand": "Lian Li",
-                    "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
+                    "imageURL": "https://lian-li.com/wp-content/uploads/2021/09/O11-Air-MINI-Black-13.jpg",
                     "model": "O11 Air Mini ATX Mid Tower Case",
                     "quantity": 1,
                     "price": 445,
