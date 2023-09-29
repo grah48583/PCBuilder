@@ -31,8 +31,8 @@
             <th>Brand</th>
             <th>Image</th>
             <th>Model</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th class="headercenter">Quantity</th>
+            <th class="headercenter">Price</th>
         </tr>
     </thead>
     <tbody id="componentsList">
@@ -59,8 +59,8 @@
     <thead>
         <tr>
             <th>Component Type</th>
-            <th>Total Quantity</th>
-            <th>Total Price</th>
+            <th class="headercenter">Total Quantity</th>
+            <th class="headercenter">Total Price</th>
         </tr>
     </thead>
     <tbody>
@@ -225,6 +225,7 @@ document.getElementById('buildQuantity').addEventListener('input', function() {
     updateSummaryTable();
     recalculateGrandTotal();
 });
+
 
 
 window.onload = function() {

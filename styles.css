@@ -101,8 +101,20 @@ option:hover {
 .price,
 #totalPrice {
     white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
 }
 
+.price,
+#grandTotalPrice {
+    white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
+}
+
+.headercenter {
+    text-align: center;
+}
 @media (max-width: 768px) {
 
     th,
@@ -140,4 +152,36 @@ option:hover {
 }
 table tbody tr td select {
     text-align: left;
+}
+#summaryTable tbody td:nth-child(2),
+#summaryTable tbody td:nth-child(3),
+#summaryTable tfoot td:nth-child(2) {
+    text-align: center;
+}
+#componentsList td:nth-child(5),
+#componentsList td:nth-child(6),
+table tfoot td:nth-child(6) {
+    text-align: center;
+}
+
+/* Centering the titles of Quantity and Price columns */
+#mainTable th:nth-child(5), /* Assuming 5th column is Quantity */
+#mainTable th:nth-child(6) /* Assuming 6th column is Price */ {
+    text-align: center;
+}
+
+/* Centering the Grand Total amount in the tfoot */
+#mainTable tfoot td:nth-child(6) /* Assuming 6th column contains the Grand Total amount */ {
+    text-align: center;
+}
+
+/* Centering the titles of Quantity and Price columns */
+#mainTable th:nth-child(5),/* Assuming 5th column is Quantity */
+#mainTable th:nth-child(6)/* Assuming 6th column is Price */{
+    text-align: center;
+}
+
+/* Centering the Grand Total amount in the tfoot */
+#mainTable tfoot td:nth-child(6) /* Assuming 6th column contains the Grand Total amount */{
+    text-align: center;
 }
