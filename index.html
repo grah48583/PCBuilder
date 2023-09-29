@@ -18,7 +18,6 @@
     <button onclick="loadData('build2.json')">Build 2</button>
     <button onclick="loadData('build3.json')">Build 3</button>
     <button onclick="loadData('build4.json')">Build 4</button>
-    <!-- Add more buttons for additional builds as needed -->
 </div>
 
 <h2 id="buildTitle"></h2>
@@ -183,6 +182,7 @@ function recalculateTotal() {
     document.getElementById('totalPrice').textContent = 'RM ' + total.toFixed(2);
 }
 
+
 function updateSummaryTable() {
     let tableBody = document.querySelector('tbody');
     let summaryTableBody = document.querySelector('#summaryTable tbody');
@@ -209,6 +209,8 @@ function updateSummaryTable() {
 
 function recalculateGrandTotal() {
     let summaryTableBody = document.querySelector('#summaryTable tbody');
+    let buildQuantityInput = document.getElementById('buildQuantity'); // Get the build quantity input element
+    let buildQuantity = parseInt(buildQuantityInput.value) || 1; // Get the build quantity value
     let grandTotal = 0;
 
     // Loop through each row in the summary table body and calculate the grand total
@@ -217,9 +219,13 @@ function recalculateGrandTotal() {
         grandTotal += priceValue;
     }
 
+    grandTotal *= buildQuantity; // Multiply the grand total by the build quantity
+
     // Set the computed grand total to the footer cell of the summary table
     document.getElementById('grandTotalPrice').textContent = 'RM ' + grandTotal.toFixed(2);
 }
+
+
 
 document.getElementById('buildQuantity').addEventListener('input', function() {
     updateSummaryTable();

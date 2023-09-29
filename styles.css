@@ -128,11 +128,6 @@ option:hover {
     img {
         max-width: 25px;
     }
-    div#buildSelector button {
-        display: inline-flexbox !important;
-        width: 30% !important;
-        margin-bottom: 10px !important;
-        font-weight: bolder !important;
 }
 
 .build-quantity-container {
@@ -189,4 +184,12 @@ table tfoot td:nth-child(6) {
 /* Centering the Grand Total amount in the tfoot */
 #mainTable tfoot td:nth-child(6) /* Assuming 6th column contains the Grand Total amount */{
     text-align: center;
+}
+/* Making build tabs more responsive on mobile */
+@media (max-width: 768px) {
+    div#buildSelector button {
+        display: inline-flexbox !important;
+        width: 30% !important;
+        margin-bottom: 10px !important;
+        font-weight: bold !important;
 }
