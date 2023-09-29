@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 body {
     font-family: 'Lato', sans-serif;
-    /* Other existing styles */
+    padding: 0 20px;
 }
 table {
     width: 100%;
@@ -79,4 +79,18 @@ option {
 /* Add hover effect to dropdown options */
 option:hover {
     background-color: #f1f1f1;
+}
+/* Style the images in the table */
+table img {
+    transition: transform 0.3s ease-in-out;
+    /* Smooth transition */
+}
+
+/* Enlarge the image on hover */
+table img:hover {
+    transform: scale(5);
+    /* Adjust the scale value as needed */
+    z-index: 1;
+    /* Ensure the enlarged image is displayed above other elements */
+    position: relative;
 }

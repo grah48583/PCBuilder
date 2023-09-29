@@ -3,15 +3,15 @@
     "description": "Build using 13th gen process for high performance and low power consumption. 4x 6TB HDDs for 24/7 recording. 1x 500GB SSD for OS and 16GB DDR5 RAM for high speed data processing. CPU coolers for better heat dissipation. 850W PSU for stable power supply. Windows 10 Pro for OS.",
     "defaults": {
         "CPU": 0,
-        "Motherboard": 1,
+        "Motherboard": 0,
         "Memory": 1,
         "GPU": 0,
         "Storage (OS)": 1,
-        "Storage (Recorder)": 1,
-        "CPU Cooler": 1,
-        "Power Supply": 1,
-        "PC Case": 1,
+        "Storage (Recorder)": 0,
+        "CPU Cooler": 0,
+        "Power Supply": 2,
+        "PC Case": 0,
         "PCIe Card": 1,
-        "Operating System": 1
+        "Operating System": 0
     }
 }
