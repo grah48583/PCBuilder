@@ -69,6 +69,8 @@
         </tr>
       </tfoot>
     </table>
+    <br />
+    <button id="generatePDF">Generate PDF</button>
 
     <script>
       function loadData(buildFileName) {
@@ -246,6 +248,70 @@
       window.onload = function () {
         loadData("build1.json");
       };
+
+      document
+        .getElementById("generatePDF")
+        .addEventListener("click", async () => {
+          // Gather data from the components table
+          const componentsTableBody = document.querySelector("#componentsList");
+          const componentsData = Array.from(componentsTableBody.rows).map(
+            (row) => ({
+              componentType: row.cells[0].textContent,
+              brand: row.cells[1].textContent,
+              model: row.cells[3].textContent,
+              quantity: row.querySelector('input[type="number"]').value,
+              price: row.cells[5].textContent.replace("RM ", ""),
+            })
+          );
+
+          // Gather data from the summary table
+          const summaryTableBody = document.querySelector(
+            "#summaryTable tbody"
+          );
+          const summaryData = Array.from(summaryTableBody.rows).map((row) => ({
+            componentType: row.cells[0].textContent,
+            totalQuantity: row.cells[1].textContent,
+            totalPrice: row.cells[2].textContent.replace("RM ", ""),
+          }));
+
+          const grandTotal = document
+            .getElementById("grandTotalPrice")
+            .textContent.replace("RM ", "");
+
+          // Create the payload object
+          const payload = {
+            componentsData,
+            summaryData,
+            grandTotal,
+          };
+
+          try {
+            // Make a POST request to the updated AWS Lambda function through API Gateway
+            const response = await fetch(
+              "https://y2sr6wtaaj.execute-api.ap-southeast-1.amazonaws.com/default/pdfGen",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+              }
+            );
+
+            // Check if the response is successful
+            if (response.ok) {
+              // Handle the successful response, e.g., download the generated PDF or display a success message
+              console.log("PDF generated successfully.");
+            } else {
+              // Handle the error response
+              const errorText = await response.text();
+              console.error("Error generating PDF:", errorText);
+            }
+          } catch (error) {
+            // Handle the network error
+            console.error("Network error:", error);
+          }
+        });
     </script>
   </body>
 </html>
