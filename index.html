@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom PC Build</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f4f4f3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 50px;
+            height: auto;
+        }
+
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            background-color: #f4f4f3;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tabs button:hover {
+            background-color: #e4e4e3;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="buildSelector">
+    <button onclick="loadData('build1.json')">Build 1</button>
+    <button onclick="loadData('build2.json')">Build 2</button>
+    <!-- Add more buttons for additional builds as needed -->
+</div>
+
+<h2 id="buildTitle"></h2>
+<p id="buildDescription"></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Component Type</th>
+            <th>Brand</th>
+            <th>Image</th>
+            <th>Model</th>
+            <th>Quantity</th>
+            <th>Price (MYR)</th>
+        </tr>
+    </thead>
+    <tbody id="componentsList">
+        <!-- Rows will be inserted here by JavaScript -->
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">Total Price</td>
+            <td id="totalPrice"></td>
+        </tr>
+    </tfoot>
+</table>
+
+<script>
+function loadData(buildFileName) {
+    // Clear previous build details
+    let tableBody = document.getElementById('componentsList');
+    tableBody.innerHTML = '';
+
+    // Fetch the specific build JSON first
+    fetch(buildFileName)
+    .then(response => response.json())
+    .then(buildData => {
+        // Display title and description from build-specific JSON
+        document.getElementById('buildTitle').textContent = buildData.title;
+        document.getElementById('buildDescription').textContent = buildData.description;
+
+        // Fetch the main components JSON
+        return fetch('components.json')
+        .then(response => response.json())
+        .then(componentsData => {
+            displayBuild(buildData, componentsData);
+        });
+    });
+}
+
+function displayBuild(buildData, componentsData) {
+    let tableBody = document.querySelector('tbody');
+
+    componentsData.buildDetails.forEach(component => {
+        let defaultIndex = buildData.defaults[component.componentType];
+        let defaultOption = component.options ? component.options[defaultIndex] : null;
+        let row = tableBody.insertRow();
+        
+        // Component type cell
+        row.insertCell(0).textContent = component.componentType;
+
+        // Brand cell (displays brand as plain text)
+        row.insertCell(1).textContent = defaultOption ? defaultOption.brand : component.brand;
+
+        // Image cell
+        let imgElem = document.createElement('img');
+        imgElem.src = defaultOption ? defaultOption.imageURL : component.imageURL;
+        row.insertCell(2).appendChild(imgElem);
+
+        // Model cell (uses dropdown if multiple options)
+        let modelCell = row.insertCell(3);
+        if (component.options) {
+            let modelSelect = document.createElement('select');
+            component.options.forEach((option, index) => {
+                let optionElem = new Option(option.model, index);
+                modelSelect.add(optionElem);
+            });
+            modelSelect.value = defaultIndex;
+            modelCell.appendChild(modelSelect);
+            modelSelect.addEventListener('change', function() {
+                const selectedIndex = modelSelect.value;
+                priceCell.textContent = 'RM ' + component.options[selectedIndex].price.toFixed(2);
+                imgElem.src = component.options[selectedIndex].imageURL;
+                recalculateTotal();
+            });
+        } else {
+            modelCell.textContent = component.model;
+        }
+
+        // Quantity cell with input range from 1 to 10
+        let quantityInput = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.min = 0;
+        quantityInput.max = 10;
+        quantityInput.value = defaultOption ? defaultOption.quantity : component.quantity;
+        row.insertCell(4).appendChild(quantityInput);
+
+        // Price cell
+        let priceCell = row.insertCell(5);
+        priceCell.textContent = 'RM ' + (defaultOption ? defaultOption.price : component.price).toFixed(2);
+        priceCell.className = "price";
+    });
+
+    recalculateTotal();
+}
+
+function recalculateTotal() {
+    let prices = document.querySelectorAll('.price');
+    let total = 0;
+
+    prices.forEach((priceCell) => {
+        let priceValue = parseFloat(priceCell.textContent.replace('RM ', ''));
+        total += priceValue;
+    });
+
+    // Set the computed total to the footer cell
+    document.getElementById('totalPrice').textContent = 'RM ' + total.toFixed(2);
+}
+
+window.onload = function() {
+    loadData('build1.json');
+};
+</script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,277 @@
+{
+    "title": "NVR SERVER",
+    "description": "Build using 13th gen process for high performance and low power consumption. 4x 6TB HDDs for 24/7 recording. 1x 500GB SSD for OS and 16GB DDR5 RAM for high speed data processing. CPU coolers for better heat dissipation. 850W PSU for stable power supply. Windows 10 Pro for OS.",
+    "buildDetails": [
+        {
+            "componentType": "CPU",
+            "options": [
+                {
+                    "brand": "Intel",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/2f3405387f23ab827695d966ea9f9682.256p.jpg",
+                    "model": "Core i7-13700K 3.4 GHz 16-Core Processor",
+                    "quantity": 1,
+                    "price": 1800
+                    },
+                {
+                    "brand": "Intel",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/3f7037db801def4db8418df8e7498e6a.256p.jpg",
+                    "model": "Core i7-12700K 3.6 GHz 12-Core Processor",
+                    "quantity": 1,
+                    "price": 1500
+                },
+                {
+                    "brand": "Intel",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/3f7037db801def4db8418df8e7498e6a.256p.jpg",
+                    "model": "Core i7-12700F 2.1 GHz 12-Core Processor",
+                    "quantity": 1,
+                    "price": 1250
+                },
+                {
+                    "brand": "Intel",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/3f7037db801def4db8418df8e7498e6a.256p.jpg",
+                    "model": "Core i7-12700 2.1 GHz 12-Core Processor",
+                    "quantity": 1,
+                    "price": 1350                    
+                }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "Motherboard",
+            "options": [
+                {
+                    "brand": "ASRock",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/183f9ccb12919c40ea74d1e58bf669e4.256p.jpg",
+                    "model": "B760M PG Riptide(m-ATX)",
+                    "quantity": 1,
+                    "price": 585,
+                    "DDR": "DDR5",
+                    "formFactor": "m-ATX"
+                    },
+                {
+                    "brand": "Gigabyte",
+                    "imageURL": "https://m.media-amazon.com/images/I/61i9v6vHDaL.jpg",
+                    "model": "B760M H DDR4 (m-ATX)",
+                    "quantity": 1,
+                    "price": 435,
+                    "DDR": "DDR4",
+                    "formFactor": "m-ATX"
+                }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "Memory",
+            "options": [
+                {
+                    "brand": "Kingston",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/46104a266f70d513c9f4a7d319a23e34.256p.jpg",
+                    "model": "FURY Beast 16 GB DDR5-4800 CL38",
+                    "quantity": 1,
+                    "price": 240,
+                    "DDR": "DDR5"
+                },
+                {
+                    "brand": "PNY",
+                    "imageURL": "https://www.pny.com/productimages/15182779-67BA-40C5-99B0-ADD000A2E0AE/images/PNY-Performance-DDR5-Desktop-Memory-4800MHz-la.png",
+                    "model": "8GB Performance DDR5 4800MHz (PC5-38400) Desktop Memory CL40",
+                    "quantity": 2,
+                    "price": 100,
+                    "DDR": "DDR5"
+                },
+                {
+                    "brand": "PNY",
+                    "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
+                    "model": "8GB Performance DDR4 3200MHz Desktop Memory (PC4-25600) CL22",
+                    "quantity": 2,
+                    "price": 70,
+                    "DDR": "DDR4"
+                }
+            ],
+            "default": 1
+        },
+        {
+            "componentType": "GPU",
+            "options": [
+                {
+                    "brand": "None ",
+                    "imageURL": "",
+                    "model": "",
+                    "quantity": 1,
+                    "price": 0,
+                    "formFactor": ""
+                    },
+                {
+                    "brand": "Lian Li",
+                    "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
+                    "model": "O11 Air Mini ATX Mid Tower Case",
+                    "quantity": 1,
+                    "price": 445,
+                    "formFactor": "m-ATX,ATX"
+                },
+                {
+                    "brand": "Lian Li",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/7b98ae6a0b5b166d022c0c3fc3eb8197.256p.jpg",
+                    "model": "LANCOOL III ATX Mid Tower Case",
+                    "quantity": 1,
+                    "price": 495,
+                    "formFactor": "m-ATX,ATX"
+                }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "Storage (OS)",
+            "options": [
+                {
+                    "brand": "Gigabyte",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/12e1b5cc99e503d5168d30f76dccb752.256p.jpg",
+                    "model": "AORUS 500 GB M.2-2280 Gen4 NVME | READ UT 5000MB / WRITE UT 4600MB ",
+                    "quantity": 1,
+                    "price": 200
+                    },
+                {
+                    "brand": "PNY",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/3fc0cebea011952b5ccdfcf28c99b221.256p.jpg",
+                    "model": "CS2241 500 GB M.2-2280 Gen4 NVME | READ UT 5100MB / WRITE UT 4200MB",
+                    "quantity": 1,
+                    "price": 140
+                }
+            ],
+            "default": 1
+        },
+        {
+            "componentType": "Storage (Recorder)",
+            "options": [
+                {
+                    "brand": "Western Digital",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/104d0118b9c6278a60c5dbaa2b27577a.256p.jpg",
+                    "model": "Purple Surveillance 6 TB 3.5 5400 RPM",
+                    "quantity": 4,
+                    "price": 780
+                    },
+                {
+                    "brand": "Seagate",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/f690096b8bfbd5aa890ece03155bfd13.256p.jpg",
+                    "model": "SkyHawk Surveillance 6 TB 3.5 5400 RPM",
+                    "quantity": 4,
+                    "price": 700
+                },
+                {
+                    "brand": "None ",
+                    "imageURL": "",
+                    "model": "",
+                    "quantity": 1,
+                    "price": 0,
+                    "formFactor": ""
+                    }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "CPU Cooler",
+            "options": [
+                {
+                    "brand": "Deepcool",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/34732a6da3014a0b85403d64ed05d81f.256p.jpg",
+                    "model": "Deepcool AS500 70.81 CFM CPU Cooler",
+                    "quantity": 1,
+                    "price": 215
+                },
+                {
+                    "brand": "MSI",
+                    "imageURL": "https://asset.msi.com/resize/image/global/product/product_8_20200514174408_5ebd12e81620c.png62405b38c58fe0f07fcef2367d8a9ba1/380.png",
+                    "model": "MAG CORELIQUID 240R V2 78.73 CFM Liquid CPU Cooler",
+                    "quantity": 1,
+                    "price": 400
+                }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "Power Supply",
+            "options": [
+                {
+                    "brand": "Gigabyte",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/2fd893bbd3486b3f2878a98bb949e0bb.256p.jpg",
+                    "model": "UD850GM 850W 80+ Gold Certified Fully Modular ATX",
+                    "quantity": 1,
+                    "price": 425
+                    },
+                {
+                    "brand": "Lian Li",
+                    "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
+                    "model": "SP750 | SFX 750W 80+ Gold Certified Fully Modular SFX",
+                    "quantity": 1,
+                    "price": 480
+                },
+                {
+                    "brand": "Corsair",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/d5e4643306487f67e242fb7fc484f7b8.256p.jpg",
+                    "model": "SF850L | 850W 80+ Platinum Certified Fully Modular SFX",
+                    "quantity": 1,
+                    "price": 625
+                }
+            ],
+            "default": 2
+        },
+        {
+            "componentType": "PC Case",
+            "options": [
+                {
+                    "brand": "Silverstone ",
+                    "imageURL": "https://m.media-amazon.com/images/I/41dir3vcYsL.jpg",
+                    "model": "ALTA G1M MicroATX Mid Tower Case",
+                    "quantity": 1,
+                    "price": 200,
+                    "formFactor": "m-ATX"
+                    },
+                {
+                    "brand": "Lian Li",
+                    "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
+                    "model": "O11 Air Mini ATX Mid Tower Case",
+                    "quantity": 1,
+                    "price": 445,
+                    "formFactor": "m-ATX,ATX"
+                },
+                {
+                    "brand": "Lian Li",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/7b98ae6a0b5b166d022c0c3fc3eb8197.256p.jpg",
+                    "model": "LANCOOL III ATX Mid Tower Case",
+                    "quantity": 1,
+                    "price": 495,
+                    "formFactor": "m-ATX,ATX"
+                }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "PCIe Card",
+            "brand": "TPlLink",
+            "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/330081db022793485f64a34fc60dd6a7.256p.jpg",
+            "model": "TG-3468 | Gigabit PCI Express Network Adapter",
+            "quantity": 1,
+            "price": 80
+        },
+        {
+            "componentType": "Operating System",
+            "options": [
+                {
+                    "brand": "Microsoft",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/e2020af0d40a275d81e0eec3386efa7e.256p.jpg",
+                    "model": "Windows 10 Pro OEM",
+                    "quantity": 1,
+                    "price": 150
+                    },
+                {
+                    "brand": "Microsoft",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/e2020af0d40a275d81e0eec3386efa7e.256p.jpg",
+                    "model": "Windows 11 Pro OEM",
+                    "quantity": 1,
+                    "price": 150
+                }
+            ],
+            "default": 0
+        }
+    ]
+}
