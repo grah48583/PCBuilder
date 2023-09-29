@@ -138,3 +138,6 @@ option:hover {
     max-width: 100px;
     /* Set a maximum width for the input field */
 }
+.model-cell {
+    text-align: left;
+}
