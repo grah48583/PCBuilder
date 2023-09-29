@@ -1,0 +1,19 @@
+{
+    "title": "Workstation (2)",
+    "description": "Built for single monitor usage",
+    "defaults": {
+        "CPU": 2,
+        "Motherboard": 0,
+        "Memory": 3,
+        "GPU": 1,
+        "Storage (OS)": 2,
+        "Storage (RAID)": 3,
+        "CPU Cooler": 0,
+        "Power Supply": 1,
+        "PC Case": 0,
+        "PCIe Card": 1,
+        "Operating System": 1,
+        "Monitor": 1,
+        "Accessories": 1
+    }
+}

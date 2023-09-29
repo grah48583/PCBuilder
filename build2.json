@@ -1,0 +1,19 @@
+{
+    "title": "Access Control Server",
+    "description": "Built to support 200 Access Control Management",
+    "defaults": {
+        "CPU": 3,
+        "Motherboard": 0,
+        "Memory": 2,
+        "GPU": 0,
+        "Storage (OS)": 1,
+        "Storage (RAID)": 2,
+        "CPU Cooler": 0,
+        "Power Supply": 2,
+        "PC Case": 0,
+        "PCIe Card": 1,
+        "Operating System": 1,
+        "Monitor": 1,
+        "Accessories": 1
+    }
+}

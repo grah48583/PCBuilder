@@ -81,6 +81,22 @@
                 },
                 {
                     "brand": "PNY",
+                    "imageURL": "https://www.pny.com/productimages/15182779-67BA-40C5-99B0-ADD000A2E0AE/images/PNY-Performance-DDR5-Desktop-Memory-4800MHz-la.png",
+                    "model": "16GB Performance DDR5 4800MHz (PC5-38400) Desktop Memory CL40",
+                    "quantity": 2,
+                    "price": 150,
+                    "DDR": "DDR5"
+                },
+                {
+                    "brand": "PNY",
+                    "imageURL": "https://www.pny.com/productimages/15182779-67BA-40C5-99B0-ADD000A2E0AE/images/PNY-Performance-DDR5-Desktop-Memory-4800MHz-la.png",
+                    "model": "16GB Performance DDR5 4800MHz (PC5-38400) Desktop Memory CL40",
+                    "quantity": 1,
+                    "price": 150,
+                    "DDR": "DDR5"
+                },
+                {
+                    "brand": "PNY",
                     "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
                     "model": "8GB Performance DDR4 3200MHz Desktop Memory (PC4-25600) CL22",
                     "quantity": 2,
@@ -102,20 +118,11 @@
                     "formFactor": ""
                     },
                 {
-                    "brand": "Lian Li",
-                    "imageURL": "https://www.pny.com.tw/en/products/memory-upgrades/upload/catalog_list_pic/en_catalog_list_22e16_cdbqaip6he.jpg",
-                    "model": "O11 Air Mini ATX Mid Tower Case",
+                    "brand": "Gigabyte ",
+                    "imageURL": "https://static.gigabyte.com/StaticFile/Image/Global/20ad21fa935b09391fc57ff47b0a4f7f/Product/23654/png/500",
+                    "model": "GeForce® GTX 1650 WINDFORCE OC 4G",
                     "quantity": 1,
-                    "price": 445,
-                    "formFactor": "m-ATX,ATX"
-                },
-                {
-                    "brand": "Lian Li",
-                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/7b98ae6a0b5b166d022c0c3fc3eb8197.256p.jpg",
-                    "model": "LANCOOL III ATX Mid Tower Case",
-                    "quantity": 1,
-                    "price": 495,
-                    "formFactor": "m-ATX,ATX"
+                    "price": 650
                 }
             ],
             "default": 0
@@ -136,12 +143,19 @@
                     "model": "CS2241 500 GB M.2-2280 Gen4 NVME | READ UT 5100MB / WRITE UT 4200MB",
                     "quantity": 1,
                     "price": 140
-                }
+                },
+                {
+                    "brand": "PNY",
+                    "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/12e1b5cc99e503d5168d30f76dccb752.256p.jpg",
+                    "model": "CS2241 1 TB M.2-2280 Gen4 NVME | READ UT 5100MB / WRITE UT 4200MB",
+                    "quantity": 1,
+                    "price": 210
+                    }
             ],
             "default": 1
         },
         {
-            "componentType": "Storage (Recorder)",
+            "componentType": "Storage (RAID)",
             "options": [
                 {
                     "brand": "Western Digital",
@@ -158,12 +172,18 @@
                     "price": 700
                 },
                 {
+                    "brand": "Seagate",
+                    "imageURL": "https://m.media-amazon.com/images/I/51EI9OmbbjL.jpg",
+                    "model": "BarraCuda 2 TB 3.5 7200 RPM",
+                    "quantity": 4,
+                    "price": 225
+                },
+                {
                     "brand": "None ",
                     "imageURL": "",
                     "model": "",
-                    "quantity": 1,
-                    "price": 0,
-                    "formFactor": ""
+                    "quantity": 0,
+                    "price": 0
                     }
             ],
             "default": 0
@@ -171,6 +191,13 @@
         {
             "componentType": "CPU Cooler",
             "options": [
+                {
+                    "brand": "Thermalright",
+                    "imageURL": "http://thermalright.com/wp-content/uploads/2021/12/SS135-BLACK-1500-5-600x600.jpg",
+                    "model": "Silver Soul 135 BLACK",
+                    "quantity": 1,
+                    "price": 205
+                },
                 {
                     "brand": "Deepcool",
                     "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/34732a6da3014a0b85403d64ed05d81f.256p.jpg",
@@ -259,16 +286,56 @@
                 {
                     "brand": "Microsoft",
                     "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/e2020af0d40a275d81e0eec3386efa7e.256p.jpg",
-                    "model": "Windows 10 Pro OEM",
+                    "model": "Windows 10 PRO OEM",
                     "quantity": 1,
                     "price": 150
                     },
                 {
                     "brand": "Microsoft",
                     "imageURL": "https://cdna.pcpartpicker.com/static/forever/images/product/e2020af0d40a275d81e0eec3386efa7e.256p.jpg",
-                    "model": "Windows 11 Pro OEM",
+                    "model": "Windows 11 PRO OEM",
                     "quantity": 1,
-                    "price": 150
+                    "price": 599
+                }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "Monitor",
+            "options": [
+                {
+                    "brand": "None ",
+                    "imageURL": "",
+                    "model": "",
+                    "quantity": 0,
+                    "price": 0
+                    },
+                {
+                    "brand": "HP ",
+                    "imageURL": "https://my-media.apjonlinecdn.com/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/2/V/2V6B3AA-1_T1678944258.png",
+                    "model": "X27 27 inch FHD Gaming Monitor",
+                    "quantity": 1,
+                    "price": 589
+                }
+            ],
+            "default": 0
+        },
+        {
+            "componentType": "Accessories",
+            "options": [
+                {
+                    "brand": "None ",
+                    "imageURL": "",
+                    "model": "",
+                    "quantity": 0,
+                    "price": 0
+                    },
+                {
+                    "brand": "HP ",
+                    "imageURL": "https://my-media.apjonlinecdn.com/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/2/4/240J7AA-1_T1678940891.png",
+                    "model": "150 Wired Mouse and Keyboard",
+                    "quantity": 1,
+                    "price": 52
                 }
             ],
             "default": 0

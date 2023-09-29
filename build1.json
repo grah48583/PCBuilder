@@ -7,11 +7,13 @@
         "Memory": 1,
         "GPU": 0,
         "Storage (OS)": 1,
-        "Storage (Recorder)": 0,
+        "Storage (RAID)": 0,
         "CPU Cooler": 0,
         "Power Supply": 2,
         "PC Case": 0,
         "PCIe Card": 1,
-        "Operating System": 0
+        "Operating System": 0,
+        "Monitor": 1,
+        "Accessories": 1
     }
 }
