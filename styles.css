@@ -97,3 +97,6 @@ table img:hover {
 input[type="number"] {
     text-align: center;
 }
+#buildQuantity {
+    text-align: center;
+}
