@@ -184,7 +184,7 @@
           let quantityInput = row.querySelector('input[type="number"]');
           let priceValue = parseFloat(priceCell.textContent.replace("RM ", ""));
           let quantityValue = parseInt(quantityInput.value);
-          total += priceValue * quantityValue;
+          total += priceValue * quantityValue; // Calculate total price for each component
         }
 
         // Set the computed total to the footer cell
@@ -210,7 +210,7 @@
           let quantityValue = parseInt(quantityInput.value) * buildQuantity;
           let priceValue =
             parseFloat(priceCell.textContent.replace("RM ", "")) *
-            buildQuantity;
+            quantityValue; // Calculate total price for each component
 
           // Create a new summary row and append it to the summary table body
           let summaryRow = summaryTableBody.insertRow();
@@ -219,11 +219,8 @@
           summaryRow.insertCell(2).textContent = "RM " + priceValue.toFixed(2);
         }
       }
-
       function recalculateGrandTotal() {
         let summaryTableBody = document.querySelector("#summaryTable tbody");
-        let buildQuantityInput = document.getElementById("buildQuantity"); // Get the build quantity input element
-        let buildQuantity = parseInt(buildQuantityInput.value) || 1; // Get the build quantity value
         let grandTotal = 0;
 
         // Loop through each row in the summary table body and calculate the grand total
@@ -233,8 +230,6 @@
           );
           grandTotal += priceValue;
         }
-
-        grandTotal *= buildQuantity; // Multiply the grand total by the build quantity
 
         // Set the computed grand total to the footer cell of the summary table
         document.getElementById("grandTotalPrice").textContent =
