@@ -13,7 +13,7 @@
         "PC Case": 0,
         "PCIe Card": 1,
         "Operating System": 1,
-        "Monitor": 1,
-        "Accessories": 1
+        "Monitor": 0,
+        "Accessories": 0
     }
 }
